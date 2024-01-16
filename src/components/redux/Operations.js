@@ -26,6 +26,7 @@ export const addContact = createAsyncThunk(
     }
   }
 );
+
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
@@ -33,34 +34,9 @@ export const deleteContact = createAsyncThunk(
       const response = await axios.delete(`/contacts/${contactId}`);
       return response.data;
     } catch (e) {
-      if (e.response && e.response.status === 404) {
-        return thunkAPI.rejectWithValue('Contact not found');
-      }
       return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
 
 
-// export const deleteContact = createAsyncThunk(
-//   'contacts/deleteContact',
-//   async (contactId, thunkAPI) => {
-//     try {
-//       const response = await axios.delete(`/contacts/${contactId}`);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
-// export const deleteContactsThunk = createAsyncThunk(
-//   'contacts/deleteContact',
-//   async (id, { reject }) => {
-//     try {
-//       const data = deleteContact(id);
-//       return data;
-//     } catch (error) {
-//       return reject(error.message);
-//     }
-//   }
-// );
