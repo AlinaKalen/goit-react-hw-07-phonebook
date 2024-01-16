@@ -1,9 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-
-import { selectContactsList } from 'redux/selectors';
-import { addContact } from 'redux/operations';
-
-import { Form, Input, Label, Button } from './ContactForm.module';
+import { selectContactsList } from '../redux/Selectors';
+import { addContact } from '../redux/Operations';
+import css from './ContactForm.module.css';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -29,22 +27,23 @@ export const ContactForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} autoComplete="off">
-      <Label>
+    <form  className={css.ContForm} onSubmit={handleSubmit} autoComplete="off">
+      <label className={css.LblForm}>
         Name
-        <Input
+        <input
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -]?[a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces"
           required
           placeholder="Enter name"
           value={contacts.name}
         />
-      </Label>
-      <Label>
+      </label>
+        <br />
+      <label className={css.LblForm}>
         Number
-        <Input
+        <input
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -53,8 +52,9 @@ export const ContactForm = () => {
           placeholder="Enter number"
           value={contacts.number}
         />
-      </Label>
-      <Button type="submit">Add contact</Button>
-    </Form>
+      </label>
+      <button  className={css.BtnForm} type="submit">Add contact</button>
+    </form>
   );
 };
+export default ContactForm;
